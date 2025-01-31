@@ -8,12 +8,12 @@ namespace TechnicalAxos_RubenRojas.Models
 {
     public class CountryModel
     {
-        public ContryNameModel Name { get; set; }
+        public CountryNameModel Name { get; set; }
         public string Flag { get; set; }
         public List<string> Capital { get; set; }
     }
 
-    public class ContryNameModel
+    public class CountryNameModel
     {
         public string Common { get; set; }
 

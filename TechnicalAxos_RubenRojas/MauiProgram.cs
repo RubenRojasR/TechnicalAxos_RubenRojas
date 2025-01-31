@@ -17,6 +17,7 @@ namespace TechnicalAxos_RubenRojas
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             builder.Services.AddTransient<IServiceRequest, ServiceRequest>();
+            builder.Services.AddTransient<IPickerService, PickerService>();
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<MainPage>();
 

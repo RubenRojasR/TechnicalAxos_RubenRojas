@@ -18,6 +18,7 @@ namespace TechnicalAxos_RubenRojas.ViewModels
         private string _imageSource;
         private ObservableCollection<CountryModel> _countries;
         private readonly IServiceRequest _serviceRequest;
+        private readonly IPickerService _pickerService;
 
         public string BundleId
         {
@@ -40,20 +41,22 @@ namespace TechnicalAxos_RubenRojas.ViewModels
         public ICommand ChangeImageCommand { get; }
         public ICommand LoadCountriesCommand { get; }
 
-        public MainPageViewModel(IServiceRequest serviceRequest)
+        public MainPageViewModel(IServiceRequest serviceRequest, IPickerService pickerService)
         {
             _serviceRequest = serviceRequest;
+            _pickerService = pickerService;
             BundleId = AppInfo.PackageName;
             ImageSource = "https://random.dog/af70ad75-24af-4518-bf03-fec4a997004c.jpg";
             Countries = new ObservableCollection<CountryModel>();
             ChangeImageCommand = new Command(SelectImage);
             LoadCountriesCommand = new Command(async () => await LoadCountries());
             LoadCountriesCommand.Execute(null);
+            
         }
 
         private async void SelectImage()
         {
-            var result = await FilePicker.PickAsync(new PickOptions { FileTypes = FilePickerFileType.Images });
+            var result = await _pickerService.PickAsync(new PickOptions { FileTypes = FilePickerFileType.Images });
             if (result != null)
             {
                 ImageSource = result.FullPath;
